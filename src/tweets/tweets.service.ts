@@ -8,6 +8,9 @@ export class TweetsService {
 
   async createTweet(params: { data: Prisma.TweetCreateInput }): Promise<Tweet> {
     const { data } = params;
+    if (data.content.length > 80) {
+      throw new Error(`Tweet too long`);
+    }
     return this.prisma.tweet.create({ data });
   }
 

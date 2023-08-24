@@ -46,5 +46,29 @@ describe('TweetsService', () => {
       // Assert
       await expect(createTweet()).resolves.toBe(mockedTweet);
     });
+
+    it(`should not be over 80 characters`, async () => {
+      // Arrange
+      const payload = {
+        content: `This is a super long tweet over 80 characters This is a super long tweet over 80 characters`,
+        userId: 1234,
+      };
+
+      // Act
+      const createTweet = () =>
+        service.createTweet({
+          data: {
+            content: payload.content,
+            user: {
+              connect: {
+                id: payload.userId,
+              },
+            },
+          },
+        });
+
+      // Assert
+      await expect(createTweet()).rejects.toBeInstanceOf(Error);
+    });
   });
 });
