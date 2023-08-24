@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TweetsService } from './tweets.service';
 import { PrismaService } from 'nestjs-prisma';
-import { findManyMock, firstTweetMock } from './mocks/list';
 import { PrismaServiceMock, prismaServiceMock } from '@/prisma/mock';
+import { findManyMock, firstTweetMock } from '@/prisma/tweets.mock';
 
 describe('TweetsService', () => {
   let service: TweetsService;
