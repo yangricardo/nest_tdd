@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TweetsService } from './tweets.service';
 import { mockDeep, DeepMockProxy } from 'jest-mock-extended';
 import { PrismaService } from 'nestjs-prisma';
+import { findManyMock } from './mocks/list';
 
 describe('TweetsService', () => {
   let service: TweetsService;
@@ -69,6 +70,14 @@ describe('TweetsService', () => {
 
       // Assert
       await expect(createTweet()).rejects.toBeInstanceOf(Error);
+    });
+  });
+
+  describe(`getTweets`, () => {
+    it(`should return a list of tweets`, async () => {
+      prismaService.tweet.findMany.mockResolvedValue(findManyMock);
+      const tweets = await service.getTweets({});
+      expect(tweets).toBe(findManyMock);
     });
   });
 });
