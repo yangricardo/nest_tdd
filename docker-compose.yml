@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: yang.dev.br/api
+    hostname: api.yang.dev.br
+    container_name: api.yang.dev.br
+    tty: true
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - 3000:3000
