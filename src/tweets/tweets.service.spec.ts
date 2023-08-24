@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TweetsService } from './tweets.service';
-import { mockDeep, DeepMockProxy } from 'jest-mock-extended';
 import { PrismaService } from 'nestjs-prisma';
-import { findManyMock } from './mocks/list';
+import { findManyMock, firstTweetMock } from './mocks/list';
+import { PrismaServiceMock, prismaServiceMock } from '@/prisma/mock';
 
 describe('TweetsService', () => {
   let service: TweetsService;
-  let prismaService: DeepMockProxy<PrismaService>;
+  let prismaService: PrismaServiceMock;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [TweetsService,PrismaService],
     })
     .overrideProvider(PrismaService)
-    .useValue(mockDeep<PrismaService>())
+    .useValue(prismaServiceMock)
     .compile();
 
     service = module.get<TweetsService>(TweetsService);
@@ -21,31 +21,23 @@ describe('TweetsService', () => {
 
   describe(`createTweet`, () => {
     it(`should create a new tweet`, async () => {
-      // Arrange
-      const mockedTweet = {
-        id: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        content: `Hello world, this is a tweet.`,
-        userId: 1234,
-      };
-      prismaService.tweet.create.mockResolvedValue(mockedTweet);
+      prismaService.tweet.create.mockResolvedValue(firstTweetMock);
 
       // Act
       const createTweet = () =>
         service.createTweet({
           data: {
-            content: mockedTweet.content,
+            content: firstTweetMock.content,
             user: {
               connect: {
-                id: mockedTweet.userId,
+                id: firstTweetMock.userId,
               },
             },
           },
         });
 
       // Assert
-      await expect(createTweet()).resolves.toBe(mockedTweet);
+      await expect(createTweet()).resolves.toBe(firstTweetMock);
     });
 
     it(`should not be over 80 characters`, async () => {
