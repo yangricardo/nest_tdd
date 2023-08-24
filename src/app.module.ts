@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from 'nestjs-prisma';
+import { TweetsModule } from './tweets/tweets.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { PrismaModule } from 'nestjs-prisma';
           errorFormat: 'pretty',
         }
       }
-    })
+    }),
+    TweetsModule
   ],
   controllers: [AppController],
   providers: [AppService],
