@@ -21,3 +21,11 @@ Author: [Yang Miranda](https://github.com/yangricardo)
 ### [NestJS Docker Deployment](https://www.tomray.dev/nestjs-docker-production)
 
 > Adapted to use `yarn` as package manager
+
+### E2E Tests using Postgres Testcontainers
+
+> [Testcontainers for Node](https://node.testcontainers.org/quickstart/)
+> [PostgreSQL Testcontainers](https://testcontainers.com/modules/postgresql/)
+> [Prisma E2E Tests](https://www.prisma.io/blog/testing-series-4-OVXtDis201)
+> [Happy 😉 Postgresql Tests with Docker TestContainers](https://noga-lasman.medium.com/happy-postgresql-tests-with-docker-testcontainers-abcf2d4722fd)
+> [https://hrtyy.dev/server/nodejs_testcontainer_test/](https://hrtyy.dev/server/nodejs_testcontainer_test/)
