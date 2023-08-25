@@ -3,9 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from 'nestjs-prisma';
 import { TweetsModule } from './tweets/tweets.module';
+import { ConfigModule } from '@nestjs/config';
+import { Env } from './env';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [Env.parse],
+    }),
     PrismaModule.forRoot({
       isGlobal: true,
       prismaServiceOptions: {
