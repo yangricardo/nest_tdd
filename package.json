@@ -7,6 +7,8 @@
   "license": "UNLICENSED",
   "packageManager": "yarn@1.22.19",
   "scripts": {
+    "with-env": "dotenv -e .env --",
+    "with-e2e-test-env": "dotenv -e e2e.env --",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -19,17 +21,19 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "yarn with-e2e-test-env jest --config ./test/jest-e2e.json",
     "prisma:db:push": "prisma db push",
     "prisma:db:reset": "prisma migrate reset --force",
-    "docker:up:e2e:postgres": "docker-compose up -d e2e.postgres",
-    "docker:down:e2e:postgres": "docker-compose down e2e.postgres"
+    "docker:up:postgres": "docker-compose up -d postgres.yang.dev.br",
+    "docker:down:postgres": "docker-compose down postgres.yang.dev.br",
+    "docker:down": "docker-compose down"
   },
   "dependencies": {
     "@nestjs/common": "^10.2.1",
     "@nestjs/core": "^10.2.1",
     "@nestjs/platform-express": "^10.2.1",
     "@prisma/client": "^5.2.0",
+    "dotenv-cli": "^7.3.0",
     "nestjs-prisma": "^0.22.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1"
