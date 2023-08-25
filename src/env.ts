@@ -23,13 +23,30 @@ const EnvSchema = z.object({
 });
 
 export class Env extends createZodDto(EnvSchema) {
+
+  private static instance: Env;
+  public static getInstance () {
+    if (!Env.instance) {
+      Env.instance = Env.parse();
+    }
+    return Env.instance;
+  }
+
+  private constructor() {
+    super();
+  }
+
   static parse () {
     const parsed = Env.schema.safeParse(process.env);
-    if (parsed.success) {
-      return parsed.data;
+    if(!Env.instance) {
+      if (parsed.success) {
+        Env.instance = parsed.data;
+        return parsed.data;
+      }
+      console.log(`Environeent variables are invalid: ${JSON.stringify(parsed.error.errors,null,2)}`);
+      process.exit(1);
     }
-    console.log(`Environeent variables are invalid: ${JSON.stringify(parsed.error.errors,null,2)}`);
-    process.exit(1);
+    return Env.instance;
   }
 }
 
