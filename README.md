@@ -9,6 +9,33 @@ This repository aims to collect NestJS api good practices based on:
 
 Author: [Yang Miranda](https://github.com/yangricardo)
 
+## Current Requirements
+
+[x] Base NestJS project
+[x] Prisma ORM Setups
+[x] Prisma ORM mocked unit tests
+[x] Prisma e2e tests with Postgres Test containers
+
+## Future Requirements
+
+[] Zod Validations
+[] Validated Environment Variables
+[] Swagger Open API Setup generation
+[] Authentication PasswordJS
+  [] User / Password Local Provider and Argon2 password hashing
+  [] Jwt Token
+  [] Google Provider
+  [] Facebook Provider
+  [] Github Provider
+[] RBAC Authorizations  
+[] tRPC Provider
+[] Send emails with Nodemailer
+[] Monorepo with Turborepo
+[] Integration With React
+  [] Check if is possible execute some TSX React module inside NestJS
+    [] Test React Email to send styled emails instead handlebars
+  [] If don`t, integrate with some react client application, like NextJS or Vite based
+
 ## References
 
 ### [NestJS and Prisma TDD](https://www.tomray.dev/nestjs-prisma)
