@@ -2,10 +2,10 @@ version: '3'
 
 services:
 
-  postgres:
+  postgres.yang.dev.br:
     image: postgres:15.3-alpine3.18    
-    container_name: postgres
-    hostname: postgres
+    container_name: postgres.yang.dev.br
+    hostname: postgres.yang.dev.br
     restart: unless-stopped
     command: -p $POSTGRES_PORT
     ports:
@@ -15,7 +15,7 @@ services:
     env_file:
       - .env
 
-  api:
+  api.yang.dev.br:
     build:
       context: .
       dockerfile: Dockerfile
